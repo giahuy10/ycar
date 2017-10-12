@@ -1,0 +1,58 @@
+<ion-header>
+  <ion-navbar>
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>  
+    <ion-title>Đã hoàn thành</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+	<ion-list>
+	
+	 
+      
+          
+      
+     
+	
+    <ion-item *ngFor="let post of resposeData; let i=index" text-wrap (click)="toggleGroup(i)" [ngClass]="{active: isGroupShown(i)}">
+	
+		<div class="job">
+			<h3>
+				<div class="header">
+					CX{{post.id}} | {{post.pick_up_time}} | {{post.fee}}
+				</div>
+				<div class="name">
+					{{post.title}}
+				</div>
+				 <ion-icon class="showmore_icon" color="success" item-right [name]="isGroupShown(i) ? 'arrow-dropdown' : 'arrow-dropright'"></ion-icon>
+			</h3>	
+			
+			<div *ngIf="isGroupShown(i)" >
+				<div class="pricing">
+					<ul>
+						<li><b>Phải thu của khách: </b>{{post.sale_price}}</li>
+						<li><b>Lái xe thực nhận: </b>{{post.fee}}</li>
+						<li><b>Phí của Ycar: </b>{{post.ycarfee}}</li>
+					</ul>	
+				</div>
+				<div class="note">
+					{{ post.flight_number != '' ? 'Mã chuyến bay: ' : '' }}{{ post.flight_number != '' ? post.flight_number : '' }}
+				</div>
+				<hr/>
+				<h4>Thông tin khách hàng</h4>
+				<ul>
+					<li><b>Tên khách hàng: </b>{{post.customer_name}}</li>
+					<li><b>SĐT: </b>{{post.customer_phone}}</li>
+				</ul>
+				<button ion-button color="secondary" (click)="presentConfirm(post.id)">Đón khách</button>
+				<button ion-button color="danger" (click)="presentPrompt(post.id)">Hủy chuyến</button>
+			</div>	
+			
+		</div>
+	
+    </ion-item>
+  </ion-list>
+  
+</ion-content>
